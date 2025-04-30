@@ -1,0 +1,89 @@
+{% assign main_menu_linklist = linklists[section.settings.menu].links %}
+{% assign left_main_menu_links = main_menu_linklist.size | divided_by: 2 | ceil %}  
+{% assign right_main_menu_links = main_menu_linklist.size | minus: left_main_menu_links %}
+
+<div class="bg-white">
+  <div class="mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-3 items-center h-20">
+
+      <!-- LEFT: Search -->
+      <div class="flex justify-start items-center">
+        <button aria-label="Search" class="text-gray-700 hover:text-black">
+          {% render 'icon-search' %}
+        </button>
+      </div>
+
+      <!-- CENTER: Navigation -->
+      <div class="flex items-center justify-center space-x-12">
+        <!-- Left-side nav items -->
+        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900">
+        
+          {% for link in main_menu_linklist %}
+            
+           {% if forloop.index0 < left_main_menu_links %}
+                <a href="{{ link.url }}" class="hover:text-gray-600 uppercase tracking-wide">
+                    {{ link.title }}
+                </a>
+            {% endif %}
+          {% endfor %}
+        </nav>
+        
+        <a href="{{ routes.root_url }}" class="block">
+            <img src="{{ 'weeklyhow-logo.png' | asset_url }}" alt="Logo" class="h-10 w-auto" />
+          </a>
+        <!-- Right-side nav items -->
+        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900">
+            {% for link in main_menu_linklist %}
+                {% if forloop.index0  >= right_main_menu_links %}
+                     <a href="{{ link.url }}" class="hover:text-gray-600 uppercase tracking-wide">
+                         {{ link.title }}
+                     </a>
+                 {% endif %}
+               {% endfor %}
+        </nav>
+      </div>
+
+      <!-- RIGHT: Account + Cart -->
+      <div x-data="{open: false}" class="flex justify-end items-center space-x-4 relative">
+        {% if shop.customer_accounts_enabled %}
+            <button x-on:click="open = !open" class="inline-flex items-center text-base text-gray-500 hover:text-gray-900">
+                {% render 'icon-user' %}
+            </button>    
+            <div x-show="open" @click.away="open = false" class="absolute z-10 mt-30  w-20 h-20 bg-white shadow-lg rounded-lg">
+                <div class="flex flex-col items-center justify-center gap-2 p-2">
+                    
+                        <a href="{{ routes.account_login_url }}" class="-m-3 p-3 flex items start rounded-lg hover:underline">Login</a><hr/>
+                        <a href="{{ routes.account_register_url }}" class="-m-3 p-3 flex items start rounded-lg hover:underline">Register</a>
+                    
+                </div>
+            </div>      
+        {% endif %}
+        <a href="{{ routes.cart_url }}" aria-label="Cart" class="text-gray-700 hover:text-black">
+          {% render 'icon-cart' %}
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "mobile_menu_title",
+      "label": "Title",
+      "default": "Menu",
+      "info": "This is the title of the mobile menu window"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Header Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}
