@@ -11,8 +11,8 @@
       </div>
 
       <!-- LEFT: Search -->
-      <div class="flex justify-start items-center hidden md:block">
-        <button aria-label="Search" class="text-gray-700 hover:text-black">
+      <div class="flex justify-start items-center hidden md:block" > 
+        <button aria-label="Search" class="hover:text-black" style="color: {{ section.settings.font_color }};">
           {% render 'icon-search' %}
         </button>
       </div>
@@ -20,7 +20,7 @@
       <!-- CENTER: Navigation -->
       <div class="flex items-center justify-center space-x-12">
         <!-- Left-side nav items -->
-        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900">
+        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900" style="color: {{ section.settings.font_color }};">
         
           {% for link in main_menu_linklist %}
             {% if forloop.index <= middle_index %}
@@ -39,7 +39,7 @@
           {% endif %}
           </a>
         <!-- Right-side nav items -->
-        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900">
+        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900" style="color: {{ section.settings.font_color }};>
             {% for link in main_menu_linklist %}
                 {% if forloop.index  > middle_index %}
                      <a href="{{ link.url }}" class="hover:text-gray-600 uppercase tracking-wide">
@@ -53,19 +53,19 @@
       <!-- RIGHT: Account + Cart -->
       <div x-data="{open: false}" class="flex justify-end items-center space-x-4 relative">
         {% if shop.customer_accounts_enabled %}
-            <button x-on:click="open = !open" class="inline-flex items-center text-base text-gray-500 hover:text-gray-900">
+            <button x-on:click="open = !open" class="inline-flex items-center hover:text-gray-900" style="color: {{ section.settings.font_color }};">
                 {% render 'icon-user' %}
             </button>    
             <div x-show="open" @click.away="open = false" class="absolute z-10 mt-30  w-20 h-20 bg-white shadow-lg rounded-lg">
-                <div class="flex flex-col items-center justify-center gap-2 p-2">
+                <div class="flex flex-col items-center justify-center gap-2 p-2" >
                     
-                        <a href="{{ routes.account_login_url }}" class="-m-3 p-3 flex items start rounded-lg hover:underline">Login</a><hr/>
+                        <a href="{{ routes.account_login_url }}" class="-m-3 p-3 flex items start rounded-lg hover:underline" >Login</a><hr/>
                         <a href="{{ routes.account_register_url }}" class="-m-3 p-3 flex items start rounded-lg hover:underline">Register</a>
                     
                 </div>
             </div>      
         {% endif %}
-        <a href="{{ routes.cart_url }}" aria-label="Cart" class="text-gray-700 hover:text-black">
+        <a href="{{ routes.cart_url }}" aria-label="Cart" class=" hover:text-black" style="color: {{ section.settings.font_color }};">
           {% render 'icon-cart' %}
         </a>
       </div>
@@ -129,12 +129,6 @@
   "name": "Header",
   "settings": [
     {
-      "type":"color",
-      "id": "header_background_color",
-      "label": "Header background color",
-      "default": "#ffffff",
-    },
-    {
       "type": "text",
       "id": "mobile_menu_title",
       "label": "Title",
@@ -146,6 +140,18 @@
       "id": "menu",
       "label": "Header Menu",
       "default": "main-menu"
+    },
+    {
+      "type":"color",
+      "id": "header_background_color",
+      "label": "Background color",
+      "default": "#ffffff",
+    },
+    {
+      "type": "color",
+      "id": "font_color",
+      "label": "Font color",
+      "default": "#000000"
     },
     {
       "type":"image_picker",

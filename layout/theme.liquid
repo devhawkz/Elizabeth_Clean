@@ -15,9 +15,10 @@
   </head>
   <body>
     {% section 'template-header' %}
-    <main role="main">
+    <main role="main" class="flex-grow">
       {{ content_for_layout }}
     </main>
+    {% section 'template-footer' %}
   </body>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </html>

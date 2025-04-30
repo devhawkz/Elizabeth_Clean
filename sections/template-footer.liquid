@@ -1,0 +1,136 @@
+{% assign main_menu_linklist = linklists[section.settings.menu].links %}
+{% assign custom_links = linklists[section.settings.custom_links].links %}
+{% assign terms_links = linklists[section.settings.terms_links].links %}
+
+
+<footer class="bg-white border-t border-gray-200 mt-12" style="background-color: {{ section.settings.footer_background_color }};">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm" style="color: {{ section.settings.font_color }};">
+        <!-- Column 1 -->
+        <div class="space-y-2">
+          {% for link in main_menu_linklist %}
+            <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
+                {{ link.title }}
+            </a>
+          {% endfor %}
+        </div>
+        <!-- Column 2 -->
+        <div class="space-y-2">
+          {% for link in custom_links %}
+            <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
+                {{ link.title }}
+            </a>
+          {% endfor %}
+        </div>
+        <!-- Column 3 -->
+        <div class="space-y-2">
+            {% for link in terms_links %}
+                <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
+                    {{ link.title }}
+                </a>
+              {% endfor %}
+        </div>
+        <!-- Column 4 -->
+        <div>
+          <p class="font-medium mb-2">Be the first to know about our latest products and sales</p>
+          <div class="flex items-center border-b border-black pb-1">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="w-full border-none focus:outline-none text-sm placeholder-gray-400"
+            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-black ml-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12H8m0 0l4-4m-4 4l4 4" />
+            </svg>
+          </div>
+          <div class="flex space-x-4 mt-4">
+            <!-- Facebook -->
+            <a href="#" class="text-black hover:text-gray-600">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M22 12.073C22 5.405 17.18 0 12 0S2 5.405 2 12.073C2 17.635 5.656 22.192 10.438 23v-7.74H7.898v-3.187h2.54V9.845c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.462h-1.26c-1.242 0-1.63.77-1.63 1.562v1.875h2.773l-.443 3.187h-2.33V23C18.344 22.192 22 17.635 22 12.073z"/>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a href="#" class="text-black hover:text-gray-600">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.33 3.608 1.305.975.975 1.243 2.242 1.305 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.33 2.633-1.305 3.608-.975.975-2.242 1.243-3.608 1.305-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.33-3.608-1.305-.975-.975-1.243-2.242-1.305-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.33-2.633 1.305-3.608C4.513 2.575 5.78 2.307 7.146 2.245 8.411 2.187 8.791 2.163 12 2.163zm0-2.163C8.741 0 8.332.013 7.052.07 5.773.126 4.539.39 3.5 1.429c-1.039 1.039-1.303 2.273-1.359 3.552C2.013 6.668 2 7.077 2 10.336v3.328c0 3.259.013 3.668.07 4.948.056 1.279.32 2.513 1.359 3.552 1.039 1.039 2.273 1.303 3.552 1.359 1.28.058 1.689.07 4.948.07s3.668-.013 4.948-.07c1.279-.056 2.513-.32 3.552-1.359 1.039-1.039 1.303-2.273 1.359-3.552.058-1.28.07-1.689.07-4.948v-3.328c0-3.259-.013-3.668-.07-4.948-.056-1.279-.32-2.513-1.359-3.552C20.961.39 19.727.126 18.448.07 17.168.013 16.759 0 13.5 0H12z"/>
+                <path d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zm0 10.162a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM18.406 4.594a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/>
+              </svg>
+            </a>
+            <!-- Twitter -->
+            <a href="#" class="text-black hover:text-gray-600">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53A4.48 4.48 0 0 0 22.4.36a9.08 9.08 0 0 1-2.88 1.1A4.52 4.52 0 0 0 16.1 0c-2.5 0-4.4 2.3-3.6 4.7C8.4 4.4 5.7 2.9 3.7.6 2.8 2.2 3.2 4.3 4.7 5.5A4.48 4.48 0 0 1 2 4.7v.1c0 2.2 1.6 4 3.7 4.4a4.52 4.52 0 0 1-2 .1c.6 1.8 2.2 3.1 4.1 3.2a9.05 9.05 0 0 1-6.6 1.8A12.94 12.94 0 0 0 7.3 21c8.3 0 12.9-6.9 12.9-12.9 0-.2 0-.3-.02-.5A9.22 9.22 0 0 0 23 3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="mt-12 text-center text-sm" style="color: {{ section.settings.credits_color }};">
+       {%  if section.settings.rights != blank %}
+        {{ section.settings.rights }}
+       {% else %}
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+       {% endif %}
+      </div>
+    </div>
+  </footer>
+  
+
+  {% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Footer Menu",
+        "default": "main-menu"
+    },
+    {
+        "type": "link_list",
+        "id": "custom_links",
+        "label": "Custom links",
+        "default": "main-menu"
+    },
+    {
+        "type": "link_list",
+        "id": "terms_links",
+        "label": "Terms & Conditions",
+        "default": "main-menu"
+    },
+    {
+      "type":"color",
+      "id": "footer_background_color",
+      "label": "Background color",
+      "default": "#ffffff",
+    },
+    
+    {
+      "type": "color",
+      "id": "font_color",
+      "label": "Font color",
+      "default": "#000000"
+    },
+    {
+        "type": "color",
+        "id": "credits_color",
+        "label": "Credits color",
+        "default": "#000000"
+    },
+    {
+        "type": "text",
+        "id": "rights",
+        "label": "Footer legal rights",
+        "info": "This is the legal rights of the footer"
+    }
+  ]
+}
+{% endschema %}
