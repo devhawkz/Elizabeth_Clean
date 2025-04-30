@@ -1,13 +1,17 @@
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
-{% assign left_main_menu_links = main_menu_linklist.size | divided_by: 2 | ceil %}  
-{% assign right_main_menu_links = main_menu_linklist.size | minus: left_main_menu_links %}
+{% assign middle_index = main_menu_linklist.size | divided_by: 2 | ceil %}
 
-<div class="bg-white">
+<div class="bg-white" x-data="{ mobileMenuOpen: false }">
   <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-3 items-center h-20">
+      <div class="-mr-2 -my-2 ml-3 md:hidden">
+        <button x-on:click="mobileMenuOpen = !mobileMenuOpen" type="button" class="bg-white p-2 inline-flex items-center justify-center focus:outline-none">
+            {% render 'icon-hamburger' %}
+        </button>
+      </div>
 
       <!-- LEFT: Search -->
-      <div class="flex justify-start items-center">
+      <div class="flex justify-start items-center hidden md:block">
         <button aria-label="Search" class="text-gray-700 hover:text-black">
           {% render 'icon-search' %}
         </button>
@@ -19,8 +23,7 @@
         <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900">
         
           {% for link in main_menu_linklist %}
-            
-           {% if forloop.index0 < left_main_menu_links %}
+           {% if forloop.index <= middle_index %}
                 <a href="{{ link.url }}" class="hover:text-gray-600 uppercase tracking-wide">
                     {{ link.title }}
                 </a>
@@ -28,13 +31,17 @@
           {% endfor %}
         </nav>
         
-        <a href="{{ routes.root_url }}" class="block">
+        <a href="{{ routes.root_url }}" class="hidden md:flex">
+          {% if section.settings.logo %}
+            <img src="{{ section.settings.logo | image_url }}" alt="Logo" class="h-10 w-auto" />
+          {% else %}
             <img src="{{ 'weeklyhow-logo.png' | asset_url }}" alt="Logo" class="h-10 w-auto" />
+          {% endif %}
           </a>
         <!-- Right-side nav items -->
         <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900">
             {% for link in main_menu_linklist %}
-                {% if forloop.index0  >= right_main_menu_links %}
+                {% if forloop.index  > middle_index %}
                      <a href="{{ link.url }}" class="hover:text-gray-600 uppercase tracking-wide">
                          {{ link.title }}
                      </a>
@@ -42,7 +49,7 @@
                {% endfor %}
         </nav>
       </div>
-
+      
       <!-- RIGHT: Account + Cart -->
       <div x-data="{open: false}" class="flex justify-end items-center space-x-4 relative">
         {% if shop.customer_accounts_enabled %}
@@ -64,6 +71,56 @@
       </div>
 
     </div>
+
+      <!-- MOBILE MENU CONTAINER -->
+
+    <div x-show="mobileMenuOpen" class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
+      <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
+         <div class="p-5 divide-y-2 divide-gray-50">
+   
+             <!-- MOBILE MENU HEADER TITLE PLUS CLOSE BUTTON -->
+             <div class="flex items-center justify-between pb-3">
+                 <div>
+                     <h1 class="text-lg text-gray-500">{{ section.settings.mobile_menu_title }}</h1>
+                 </div>
+                 <div class="-mr-2">
+                     <button x-on:click="mobileMenuOpen = false" type="button" class="bg-white rounded-md p-2 text-gray-500">  
+                      {% render 'icon-close' %}
+                     </button>
+                 </div>
+             </div>
+   
+             <!-- NAVIGATION LINKS FOR MOBILE MENU -->
+             <div class="pt-3">
+               <nav class="grid gap-y-7">
+                   {%  for link in main_menu_linklist %}
+                     {% assign link_handle = link.handle |  replace: '-', '_'%}
+                     {% if link.links != blank %}
+                     <div x-data="{ {{ link_handle }}: false }" class="relative">
+                       <button x-on:click=" {{ link_handle }} = !{{ link_handle }}" type="button" class="text-base text-gray-500 hover:text-gray-900 flex items-center justify-between w-full">
+                           <div>{{ link.title }}</div>
+                           {% render 'icon-dropdown' %}
+                       </button>
+                       <div x-show="{{ link_handle }}" class="grid gap-y-7 py-3">
+                         {% for childlink in link.links %}
+                           <a href="{{ childlink.url }}" class="-m-3 p-3 mt-2 flex items-center rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-50">
+                               <span class="ml-3 text-base font-medium text-gray-500">{{  childlink.title }}</span>
+                           </a>
+                         {% endfor %}
+                       </div>   
+                     </div>
+                   {% else %}
+                     <a href="#" class="-m-3 p-3 flex items-center rounded-md text-gray-500 hover:text-gray-900 hover:bg-gray-50">
+                       {{ link.title }}
+                     </a>
+                   {% endif %}
+                 {% endfor %}
+                     
+               </nav>
+             </div>
+         </div>
+       </div>
+     </div>
   </div>
 </div>
 
@@ -83,6 +140,11 @@
       "id": "menu",
       "label": "Header Menu",
       "default": "main-menu"
+    },
+    {
+      "type":"image_picker",
+      "id": "logo",
+      "label": "Logo image"
     }
   ]
 }
