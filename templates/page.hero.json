@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "template": {
+      "type": "template-hero",
+      "blocks": {
+        "Image": {
+          "type": "featured"
+        },
+        "Title": {
+          "type": "heading_title"
+        },
+        "subtitle": {
+          "type": "heading_subtitle"
+        },
+        "Link": {
+          "type": "button_link"
+        }
+      },
+      "block_order": ["Image", "Title", "Subtitle", "Link"]
+    }
+  },
+  "order": ["template"]
+}
