@@ -39,7 +39,7 @@
           {% endif %}
           </a>
         <!-- Right-side nav items -->
-        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900" style="color: {{ section.settings.font_color }};>
+        <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900" style="color: {{ section.settings.font_color }};">
             {% for link in main_menu_linklist %}
                 {% if forloop.index  > middle_index %}
                      <a href="{{ link.url }}" class="hover:text-gray-600 uppercase tracking-wide">
