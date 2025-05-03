@@ -6,7 +6,10 @@
     },
     "collections-section": {
       "type": "template-collections"
+    },
+    "carousel-section": {
+      "type": "template-carousel"
     }
   },
-  "order": ["hero-section", "collections-section"]
+  "order": ["hero-section", "carousel-section", "collections-section"]
 }

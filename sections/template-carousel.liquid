@@ -1,0 +1,104 @@
+<section x-data="carousel()" class="py-12 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center mb-10">
+        {{ section.settings.title }}
+      </h2>
+  
+      <div class="relative">
+        <!-- NAZAD -->
+        <button @click="prev" class="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md">
+          {% render 'icon-prev' %}
+        </button>
+  
+        <!-- SLIDESHOW -->
+        <div class="flex items-center justify-center gap-4 overflow-hidden">
+            <template x-for="(item, index) in visibleItems" :key="index">
+              <a 
+                :href="item.url" 
+                class="w-40 h-40 flex flex-col items-center justify-center shrink-0 text-sm"
+              >
+                <div class="w-full h-full bg-gray-200 rounded-full overflow-hidden flex items-center justify-center">
+                  <img 
+                    :src="item.image" 
+                    alt="Product" 
+                    class="object-cover w-full h-full aspect-square"
+                  />
+                </div>
+                <span 
+                  :class="index === 2 ? 'text-black mt-2' : 'text-gray-400 mt-2'"
+                  x-text="item.name"
+                ></span>
+              </a>
+            </template>
+          </div>      
+  
+        <!-- NAPRED -->
+        <button @click="next" class="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 p-2 bg-white rounded-full shadow-md">
+          {% render 'icon-next' %}
+        </button>
+      </div>
+    </div>
+  </section>
+  
+  <script>
+    function carousel() {
+      return {
+        currentIndex: 2,
+        items: [
+          {% for block in section.blocks %}
+            {% assign product = all_products[block.settings.product] %}
+            {
+              name: "{{ product.title | escape }}",
+              image: "{{ product.featured_image | image_url: width: 300 }}",
+              url: "{{ product.url }}"
+            },
+          {% endfor %}
+        ],
+        get visibleItems() {
+          const start = this.currentIndex - 2;
+          return this.items.slice(start < 0 ? 0 : start, start + 5);
+        },
+        prev() {
+          if (this.currentIndex > 0) this.currentIndex--;
+        },
+        next() {
+          if (this.currentIndex < this.items.length - 1) this.currentIndex++;
+        }
+      }
+    }
+  </script>
+  
+  {% schema %}
+  {
+    "name": "New in Store",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Section Title",
+        "default": "New In Store"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "New Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Select Product"
+          }
+        ]
+      }
+    ],
+    "max_blocks": 10,
+    "presets": [
+      {
+        "name": "New In Store Carousel",
+        "category": "Products"
+      }
+    ]
+  }
+  {% endschema %}
+  
