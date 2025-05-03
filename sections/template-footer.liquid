@@ -4,70 +4,72 @@
 
 
 <footer class="bg-white border-t border-gray-200 mt-12" style="background-color: {{ section.settings.footer_background_color }};">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm" style="color: {{ section.settings.font_color }};">
-        <!-- Column 1 -->
-        <div class="space-y-2">
-          {% for link in main_menu_linklist %}
-            <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
-                {{ link.title }}
-            </a>
-          {% endfor %}
-        </div>
-        <!-- Column 2 -->
-        <div class="space-y-2">
-          {% for link in custom_links %}
-            <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
-                {{ link.title }}
-            </a>
-          {% endfor %}
-        </div>
-        <!-- Column 3 -->
-        <div class="space-y-2">
-            {% for link in terms_links %}
-                <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
-                    {{ link.title }}
-                </a>
-              {% endfor %}
-        </div>
-        <!-- Column 4 -->
-        <div>
-          <p class="font-medium mb-2">{{  section.settings.newsletter_text }}</p>
-          <div class="flex items-center border-b border-black pb-1">
-                <input
-                  type="email"
-                  name="contact[email]"
-                  placeholder="Enter your email"
-                  required
-                  class="w-full border-none focus:outline-none text-sm placeholder-gray-400"
-                />
-          </div>
-          <div class="flex space-x-4 mt-4">
-            <!-- Facebook -->
-            <a href="https://www.facebook.com/" class="text-black hover:text-gray-600">
-             {% render 'icon-facebook' %}
-            </a>
-            <!-- Instagram -->
-            <a href="https://www.instagram.com/" class="text-black hover:text-gray-600">
-             {% render 'icon-instagram' %}
-            </a>
-            <!-- Twitter -->
-            <a href="https://x.com/" class="text-black hover:text-gray-600">
-             {% render 'icon-twitter' %}
-            </a>
-          </div>
-        </div>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-sm" style="color: {{ section.settings.font_color }};">
+      <!-- KOLONA 1 -->
+      <div class="space-y-2">
+        {% for link in main_menu_linklist %}
+          <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
+            {{ link.title }}
+          </a>
+        {% endfor %}
       </div>
-  
-      <div class="mt-12 text-center text-sm" style="color: {{ section.settings.credits_color }};">
-       {%  if section.settings.rights != blank %}
-        {{ section.settings.rights }}
-       {% else %}
-        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
-       {% endif %}
+      <!-- KOLONA 2 -->
+      <div class="space-y-2">
+        {% for link in custom_links %}
+          <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
+            {{ link.title }}
+          </a>
+        {% endfor %}
+      </div>
+      <!-- KOLONA 3 -->
+      <div class="space-y-2">
+        {% for link in terms_links %}
+          <a href="{{ link.url }}" class="block hover:text-gray-600 text-sm tracking-wide">
+            {{ link.title }}
+          </a>
+        {% endfor %}
+      </div>
+      <!-- KOLONA 4 -->
+      <div>
+        <p class="font-medium mb-2">{{ section.settings.newsletter_text }}</p>
+        <div class="flex items-center border-b border-black pb-1">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="Enter your email"
+            required
+            class="w-full border-none focus:outline-none text-sm placeholder-gray-400"
+          />
+        </div>
+        <div class="flex space-x-4 mt-4">
+          <!-- Facebook -->
+          <a href="https://www.facebook.com/" class="text-black hover:text-gray-600">
+            {% render 'icon-facebook' %}
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/" class="text-black hover:text-gray-600">
+            {% render 'icon-instagram' %}
+          </a>
+          <!-- Twitter -->
+          <a href="https://x.com/" class="text-black hover:text-gray-600">
+            {% render 'icon-twitter' %}
+          </a>
+        </div>
       </div>
     </div>
-  </footer>
+
+    <!-- Adjust the footer credits for mobile screens -->
+    <div class="mt-12 text-center text-sm" style="color: {{ section.settings.credits_color }};">
+      {% if section.settings.rights != blank %}
+        {{ section.settings.rights }}
+      {% else %}
+        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.
+      {% endif %}
+    </div>
+  </div>
+</footer>
+
   
 
   {% schema %}

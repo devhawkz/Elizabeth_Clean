@@ -1,7 +1,7 @@
 {% assign main_menu_linklist = linklists[section.settings.menu].links %}
 {% assign middle_index = main_menu_linklist.size | divided_by: 2 | ceil %}
 
-<div class="bg-white" x-data="{ mobileMenuOpen: false }" style="background-color: {{ section.settings.header_background_color }};">
+<div class="bg-white border-b border-gray-200" x-data="{ mobileMenuOpen: false }" style="background-color: {{ section.settings.header_background_color }};">
   <div class="mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-3 items-center h-20">
       <div class="-mr-2 -my-2 ml-3 md:hidden">
@@ -10,16 +10,16 @@
         </button>
       </div>
 
-      <!-- LEFT: Search -->
+      <!-- LEVO: Search -->
       <div class="flex justify-start items-center hidden md:block" > 
         <button aria-label="Search" class="hover:text-black" style="color: {{ section.settings.font_color }};">
           {% render 'icon-search' %}
         </button>
       </div>
 
-      <!-- CENTER: Navigation -->
+      <!-- CENTAR: Navigaija -->
       <div class="flex items-center justify-center space-x-12">
-        <!-- Left-side nav items -->
+        <!-- Nav linkovi sa leve strane -->
         <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900" style="color: {{ section.settings.font_color }};">
         
           {% for link in main_menu_linklist %}
@@ -38,7 +38,7 @@
             <img src="{{ 'weeklyhow-logo.png' | asset_url }}" alt="Logo" class="h-10 w-auto" />
           {% endif %}
           </a>
-        <!-- Right-side nav items -->
+        <!-- Nav linkovi sa desne strane -->
         <nav class="hidden md:flex space-x-6 text-sm font-medium text-gray-900" style="color: {{ section.settings.font_color }};">
             {% for link in main_menu_linklist %}
                 {% if forloop.index  > middle_index %}
@@ -50,7 +50,7 @@
         </nav>
       </div>
       
-      <!-- RIGHT: Account + Cart -->
+      <!-- DESNO: Account + Korpa -->
       <div x-data="{open: false}" class="flex justify-end items-center space-x-4 relative">
         {% if shop.customer_accounts_enabled %}
             <button x-on:click="open = !open" class="inline-flex items-center hover:text-gray-900" style="color: {{ section.settings.font_color }};">
@@ -72,13 +72,13 @@
 
     </div>
 
-      <!-- MOBILE MENU CONTAINER -->
+      <!-- MOBILE MENU -->
 
     <div x-show="mobileMenuOpen" class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
       <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
          <div class="p-5 divide-y-2 divide-gray-50">
    
-             <!-- MOBILE MENU HEADER TITLE PLUS CLOSE BUTTON -->
+             <!-- HEADER + CLOSE DUGME -->
              <div class="flex items-center justify-between pb-3">
                  <div>
                      <h1 class="text-lg text-gray-500">{{ section.settings.mobile_menu_title }}</h1>
@@ -90,7 +90,7 @@
                  </div>
              </div>
    
-             <!-- NAVIGATION LINKS FOR MOBILE MENU -->
+             <!-- NAV LINKOVI -->
              <div class="pt-3">
                <nav class="grid gap-y-7">
                    {%  for link in main_menu_linklist %}

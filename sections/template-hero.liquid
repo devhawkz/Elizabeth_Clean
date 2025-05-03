@@ -1,6 +1,6 @@
 
     
-      <section class="relative bg-gray-200 flex items-center justify-center px-6 py-16 group" style="background-color:{{ section.settings.bg_color }}">
+      <section class="relative flex items-center bg-gray-200 justify-center px-6 py-16 group" style="background-color:{{ section.settings.bg_color }}">
         <div class="max-w-6xl w-full flex flex-col md:flex-row items-center justify-between">
           {% for block in section.blocks %}
             {% case block.type %}
@@ -15,36 +15,40 @@
                   </div>
                 </div>
 
-                <div class="w-full md:w-1/2 text-center md:text-left relative z-10 transition duration-300 group-hover:-translate-y-1">
+                <div class="w-full md:w-1/2 text-center md:text-left relative z-10 transition duration-300 group-hover:-translate-y-1"> 
                   {% when 'heading_title' %}
                     <h1 class="text-4xl md:text-5xl font-bold leading-tight" style="color:{{ section.settings.heading_color }};">
                       {{ section.settings.heading }}
-                     </h1>
+                    </h1>
 
-                    {% when 'heading_subtitle' %}
-                      <p class="mt-4 text-lg" style="color:{{ section.settings.subheading_color }};">
-                        {{ section.settings.subheading }}
-                      </p>   
-                    
-                  {% when 'button_link' %}
-                    <div class="mt-8">
-                      <a href="{{ section.settings.button_link }}" class="font-bold py-3 px-6 hover:bg-gray-800 hover:scale-105 transition transform duration-300 inline-block" style="background-color:{{ section.settings.bg_button_color }}; color:{{ section.settings.button_text_color }};" > 
-                        {{ section.settings.button_text }}
-                      </a>
-                    </div>
-                </div>  
+                  {% when 'heading_subtitle' %}
+                    <p class="mt-4 text-lg" style="color:{{ section.settings.subheading_color }};">
+                      {{ section.settings.subheading }}
+                    </p>   
+                
+                {% when 'button_link' %}
+                  <div class="mt-8">
+                    <a href="{{ section.settings.button_link }}" class="font-bold py-3 px-6 hover:bg-gray-800 hover:scale-105 transition transform duration-300 inline-block" style="background-color:{{ section.settings.bg_button_color }}; color:{{ section.settings.button_text_color }};" > 
+                      {{ section.settings.button_text }}
+                  </a>
+                </div>
+                </div>
+                  
+                  
              
               {% endcase %}    
           {% endfor %}
         </div>
     
-        <!-- Triangle Shape at Bottom -->
-        <div class="absolute bottom-0 left-[90%] transform -translate-x-1/2
+        <!-- Trougao -->
+        <div class="hidden md:block">
+          <div class="absolute bottom-0 left-[90%] transform -translate-x-1/2
             w-0 h-0 
                     
             border-l-[300px] border-l-transparent 
             border-r-[300px] border-r-transparent 
             border-b-[100px] border-b-white">
+          </div>
         </div>
       </section>
 

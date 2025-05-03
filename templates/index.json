@@ -3,7 +3,10 @@
   "sections": {
     "hero-section": {
       "type": "template-hero"
+    },
+    "collections-section": {
+      "type": "template-collections"
     }
   },
-  "order": ["hero-section"]
+  "order": ["hero-section", "collections-section"]
 }
