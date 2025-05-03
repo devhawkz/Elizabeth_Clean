@@ -13,21 +13,11 @@
         <!-- SLIDESHOW -->
         <div class="flex items-center justify-center gap-4 overflow-hidden">
             <template x-for="(item, index) in visibleItems" :key="index">
-              <a 
-                :href="item.url" 
-                class="w-40 h-40 flex flex-col items-center justify-center shrink-0 text-sm"
-              >
+              <a href="item.url" :class=" index ===2 ? 'w-55 h-55' : 'w-40 h-40'" class=" flex flex-col items-center justify-center shrink-0 text-sm">
                 <div class="w-full h-full bg-gray-200 rounded-full overflow-hidden flex items-center justify-center">
-                  <img 
-                    :src="item.image" 
-                    alt="Product" 
-                    class="object-cover w-full h-full aspect-square"
-                  />
+                  <img :src="item.image" alt="Product" class="object-cover w-full h-full aspect-square"/>
                 </div>
-                <span 
-                  :class="index === 2 ? 'text-black mt-2' : 'text-gray-400 mt-2'"
-                  x-text="item.name"
-                ></span>
+                <span :class="index === 2 ? 'text-black mt-2' : 'text-gray-400 mt-2'" x-text="item.name"></span>
               </a>
             </template>
           </div>      
