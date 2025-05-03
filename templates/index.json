@@ -9,7 +9,15 @@
     },
     "carousel-section": {
       "type": "template-carousel"
+    },
+    "testemonial-section": {
+      "type": "template-testemonial"
     }
   },
-  "order": ["hero-section", "carousel-section", "collections-section"]
+  "order": [
+    "hero-section",
+    "carousel-section",
+    "collections-section",
+    "testemonial-section"
+  ]
 }

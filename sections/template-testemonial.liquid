@@ -1,0 +1,112 @@
+<style>
+    .custom{
+        background-color: {{ section.settings.bg_button_color }}; 
+        color: {{ section.settings.button_font_color }};
+    }
+    .custom:hover {
+      background-color: {{ section.settings.button_hover_color }};
+      color: {{ section.settings.button_font_hover_color }};
+    }
+  </style>
+
+<section class="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+    <div class="max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-12">
+  
+      <!-- Leva strana: Tekst + Dugme -->
+      <div class="w-full md:w-1/2 text-left">
+        <p class="text-gray-800 text-base sm:text-lg leading-relaxed mb-6">
+         "{{ section.settings.testemonial_text }}"
+        </p>
+        <p class="text-gray-900 font-medium text-lg mt-4">{{ section.settings.testemonial_person }}</p>
+        <p class="text-gray-600 text-base mb-6">{{ section.settings.testemonial_person_position }}</p>
+  
+        <!-- Dugme -->
+        <a href="/about" class="inline-block mt-2 px-6 py-3 text-sm sm:text-base font-semibold rounded-md transition-colors duration-300 custom">
+          {{ section.settings.button_text }}
+        </a>
+      </div>
+  
+      <!-- Desna strana: Slika sa senkom -->
+      <div class="w-full md:w-1/2 flex justify-center relative">
+        <!-- Senka pozadine (samo na većim ekranima) -->
+        <div class="hidden sm:block absolute right-15 top-40 w-[45%] h-[75%] bg-gray-600 rounded-lg z-0"></div>
+        
+        <!-- Slika (uvek vidljiva i skalabilna) -->
+        <div class="relative w-[80vw] sm:w-[300px] md:w-[360px] lg:w-[400px] aspect-square rounded-lg overflow-hidden z-10">
+          {% if section.settings.testemonial_image %}
+            <img src="{{ section.settings.testemonial_image | image_url }}" alt="{{ section.settings.testemonial_person }}" class="w-full h-full object-cover"/>
+         {% else %}
+            <img src="{{ 'pexels-karolina-grabowska-5398874.jpg' | asset_url }}" alt="Dr. Janice Huang"class="w-full h-full object-cover"/>
+         {% endif %}   
+        </div>
+      </div>
+    </div>
+</section>
+  
+{% schema %}
+{
+  "name":"Testimonial",
+  "settings": [
+  {
+      "type": "text",
+      "id": "testemonial_text",
+      "label": "Testimonial Text",
+      "default":"Vivamus quis tristique ipsum, at consequat orci. Etiam mattis nibh nibh, in eleifend sem tristique accumsan. Nullam eget risus ullamcorper urna tempor rhoncus condimentum et metus. Curabitur at ex nec dolor dignissim blandit. Vestibulum mi ipsum, pharetra et aliquet vitae, feugiat vitae nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed aliquet non lectus ac euismod. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Maecenas in purus risus. Praesent pretium ultrices turpis et fringilla. Donec hendrerit pretium cursus."
+  },
+  {
+      "type": "text",
+      "id": "testemonial_person",
+      "label": "Testimonial Person",
+      "default":"Dr. Janice Huang"
+  },
+  {
+      "type": "text",
+      "id": "testemonial_person_position",
+      "label": "Testimonial Person Role",
+      "default":"Founder Veterinary Care Group"
+  },
+  {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Read more"
+  },
+  {
+      "type": "image_picker",
+      "id": "testemonial_image",
+      "label": "Testimonial Image"
+  },
+  {
+    "type": "color",
+    "id": "bg_button_color",
+    "label": "Button background color",
+    "default": "#000000"
+  },
+  {
+    "type": "color",
+    "id": "button_font_color",
+    "label": "Button font color",
+    "default": "#ffffff"
+  },
+  {
+    "type": "color",
+    "id": "button_hover_color",
+    "label": "Button hover color",
+    "default": "#8c8f8d"
+  },
+  {
+    "type": "color",
+    "id": "button_font_hover_color",
+    "label": "Button font hover color",
+    "default": "#ffffff"
+  },
+  ],
+  "presets":[
+    {
+      "name":"Testimonial",
+      "category":"Custom"
+    }
+  ]
+}
+{% endschema %} 
+  
